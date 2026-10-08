@@ -2,7 +2,7 @@
 
 An over-the-top, fully accessible fan club website for Hasan, featuring an ever-rising fan counter and a raccoon barista premiere.
 
-**Live demo:** https://hasan-fanclub.sites.tab.bot/
+**Live demo:** https://2three1y.github.io/hasan-fanclub/
 
 ## Features
 
@@ -25,7 +25,7 @@ An over-the-top, fully accessible fan club website for Hasan, featuring an ever-
 
 ## About the video
 
-The raccoon barista premiere is too big to keep comfortably in this repo, so the page streams it from the live site. To host it yourself, drop your own `raccoon-coffee.mp4` next to `index.html` and point the `<video>` `src` at it.
+The raccoon barista premiere lives right in this repo as `raccoon-coffee.mp4` (480p H.264 + AAC, about 2.8 MB, set up to start playing before it finishes downloading). It never autoplays and uses the browser's native, keyboard-friendly controls.
 
 ## Run it locally
 
