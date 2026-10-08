@@ -4,7 +4,7 @@
   var el=document.getElementById("fanCount");
   var n=8000000001;
   function fmt(x){return x.toLocaleString("en-US");}
-  setInterval(function(){
+  setInterval(function(){if(document.hidden) return;
     n+=Math.floor(Math.random()*7)+1;
     if(el) el.textContent=fmt(n);
   },900);
@@ -13,16 +13,19 @@
   var canvas=document.getElementById("confetti");
   var ctx=canvas.getContext("2d");
   var parts=[];var running=false;
-  var colors=["#ffcf3f","#ff3d8b","#8a5cff","#3fe0ff","#ffffff"];
+  var colors=["#ffcf3f","#ff3d8b","#8a5cff","#3fe0ff"];
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Calm mode (photosensitivity notice at the top, on by default) or the system Reduce Motion setting: no confetti, no motion.
+  function calm(){return window.calmMode?window.calmMode():reduce;}
   function size(){var d=window.devicePixelRatio||1;canvas.width=innerWidth*d;canvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);}
   size();addEventListener("resize",size);
   function burst(x,y,count){
-    if(reduce) return;
+    if(calm()||document.hidden) return;
+    count=Math.min(count,36); // gentle: fewer, slower pieces, no white
     for(var i=0;i<count;i++){
       var a=Math.random()*Math.PI*2,s=4+Math.random()*9;
       parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-6,w:6+Math.random()*6,h:8+Math.random()*8,
-        r:Math.random()*6,vr:(Math.random()-.5)*.4,c:colors[i%colors.length],life:0,emoji:Math.random()<.08});
+        r:Math.random()*6,vr:(Math.random()-.5)*.12,c:colors[i%colors.length],life:0,emoji:Math.random()<.08});
     }
     if(!running){running=true;requestAnimationFrame(tick);}
   }
@@ -66,7 +69,5 @@
       jb.textContent="You're in. Press again to celebrate ✨";}
     else{jm.textContent="Still a fan. Always a fan.";}
   });
-
-  // a little welcome burst
-  setTimeout(function(){burst(innerWidth/2,innerHeight*0.32,90);},600);
+  // No confetti on load: nothing moves until the visitor asks for it.
 })();
