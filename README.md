@@ -23,6 +23,10 @@ An over-the-top, fully accessible fan club website for Hasan, featuring an ever-
 - Screen-reader-friendly fan counter and news ticker (no announcement spam)
 - Semantic HTML and high-contrast colors
 
+## About the video
+
+The raccoon barista premiere is too big to keep comfortably in this repo, so the page streams it from the live site. To host it yourself, drop your own `raccoon-coffee.mp4` next to `index.html` and point the `<video>` `src` at it.
+
 ## Run it locally
 
 It's a plain static site: no build step, no dependencies. Open `index.html` in a browser, or serve the folder:
